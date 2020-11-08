@@ -83,8 +83,8 @@
         <span class="na">self</span>.lr = lr
                 
     <span class="nt">def</span> update(self, params, grads):
-        for key in params.keys():
-            params[key] -= <span class="c">self</span>.lr * grads[key]
+        <span class="s">for</span> key <span class="s">in</span> params.keys():
+            params[key] -= <span class="na">self</span>.lr * grads[key]
     </code></pre></figure>
             <p>SGD is one of the simplest optimization method available. It achieves <code class="highlighter-rouge">optimization</code> by taking the differentiation of the gradient until it reaches the global optimal value</p>
             <p>However, it may be very inefficient depending on the situation. For instance</p>
@@ -113,7 +113,7 @@
                
         <span class="s">for</span> key <span class="s">in</span> params.keys():
             <span class="na">self</span>.v[key] = <span class="na">self</span>.momentum * <span class="na">self</span>.v[key] - <span class="c">self</span>.lr * grads[key]
-            params[key] += <span class="c">self</span>.v[key]
+            params[key] += <span class="na">self</span>.v[key]
     </code></pre></figure>
 
             <p>SGD is one of the simplest optimization method available. It achieves <code class="highlighter-rouge">optimization</code> by taking the differentiation of the gradient until it reaches the global optimal value</p>
