@@ -198,10 +198,8 @@
     </code></pre></figure>
   
 <h3>Adam optimization</h3>
-            <p>To solve the <code class="highlighter-rouge">learning rate</code> problem SGD has, AdaGrad optimization method was introduced</p>
-            <p>Initially there was <code class="highlighter-rouge">learning rate decay</code>, which decreased the learning rate as the learning progresses</p>
-            <p>However, in learning rate decay, paramters were all decreased at an identical speed</p>
-            
+            <p>It's an optimization technique where it combined both the momentum and Adagrad</p>
+            <p>Also it allows <a href="https://hansololee.github.io/optimization/adam/" title ="bias correction"><code class="highlighter-rouge">bias correction</code></a> of the hyper parameters</p>
             <figure class="highlight">
             <pre><code class="language-html" data-lang="html"><span class="c">&lt;-- Adam --&gt;</span>
 <span class="na">class</span> Adam :
