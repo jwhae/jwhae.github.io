@@ -78,12 +78,32 @@
                 watch out for identation, the code block require each of the line to start from the left corner  
               -->
               <pre><code class="language-html" data-lang="html"><span class="c">&lt;-- SGD --&gt;</span>
+<span class="k">high light k</span>.lr = lr
+<span class="l">high light l</span>.lr = lr
+<span class="n">high light n</span>.lr = lr
+<span class="o">high light o</span>.lr = lr
+<span class="p">high light p<span>.lr = lr
+<span class="l">high light l</span>.lr = lr
+<span class="err">high light err</span>.lr = lr
+<span class="cp">high light cp</span>.lr = lr
+<span class="cm">high light cm</span>.lr = lr
+
+<span class="cs">high light cs</span>.lr = lr
+<span class="ge">high light ge</span>.lr = lr
+
+<span class="vg">high light vg</span>.lr = lr
+<span class="vc">high light vc</span>.lr = lr
+
+
+
+
+
 <span class="na">class</span> SGD :
     <span class="nt">def</span> __init__(self, lr= 0.01) : 
-        <span class="na">self</span>.lr = lr
+        <span class="k">self</span>.lr = lr
                 
     <span class="nt">def</span> update(self, params, grads):
-        <span class="s">for</span> key <span class="s">in</span> params.keys():
+        <span class="l">for</span> key <span class="s">in</span> params.keys():
             params[key] -= <span class="na">self</span>.lr * grads[key]
     </code></pre></figure>
             <p>SGD is one of the simplest optimization method available. It achieves <code class="highlighter-rouge">optimization</code> by taking the differentiation of the gradient until it reaches the global optimal value</p>
