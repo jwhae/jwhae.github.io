@@ -74,6 +74,11 @@
             <p>There are a few optimization methods implemented in the field of deep learning</p>
             
             <h3>SGD</h3>
+            <p>One of simpler optimizer to be implemented. It is better than vanila gradient descent</p>
+            <code class="highlighter-rouge">W ← W - η * ∂L/∂W</code>
+            <p>W : weights to be updated
+∂L/∂W : gradient of the loss function of W
+η : learning rate</p>
             <figure class="highlight">
               <!-- 
                 code block 
@@ -99,6 +104,13 @@
             <p>To solve the <code class="highlighter-rouge">convergence</code> that SGD has, momentum optimization was introduced</p>
             <p>By considering, the velocity of the gradient, it updates the gradient even when it is a local gradient, and also updating the gradient faster making it more efficient</p>
             
+            <code class="highlighter-rouge">v ← αv - η * ∂L/∂W</code>
+            <code class="highlighter-rouge">W ← W + v</code>
+            <p>W : weights to be updated
+∂L/∂W : gradient of the loss function of W
+η : learning rate
+v : velocity
+α : friction (0.9)</p>
             <figure class="highlight">
               <!-- 
                 code block 
@@ -123,7 +135,8 @@
             params[key] += <span class="k">self</span>.v[key]
     </code></pre></figure>
             
-            <p>Explain Nesterov</p>
+            <h3>Nesterov</h3>
+            <p>Improved version of momentum optimizer</p>
             <figure class="highlight">
             <pre><code class="language-html" data-lang="html"><span class="c">&lt;-- Nestrov --&gt;</span>
 <span class="na">class</span> Adam :
@@ -146,7 +159,8 @@
             params[key] -= (1 + <span class="k">self</span>.momentum) * <span class="k">self</span>.lr * grads[param]
     </code></pre></figure>
 
-            <h3>AdaGrad</h3>
+            <h3>
+              AdaGrad</h3>
             <p>To solve the <code class="highlighter-rouge">learning rate</code> problem SGD has, AdaGrad optimization method was introduced</p>
             <p>Initially there was <code class="highlighter-rouge">learning rate decay</code>, which decreased the learning rate as the learning progresses</p>
             <p>However, in learning rate decay, paramters were all decreased at an identical speed</p>
@@ -154,6 +168,14 @@
             <p>In <code class="highlighter-rouge">AdaGrad</code> improved learning rate decay by adaptively updating the degree of decay for each parameters in the model</p>
             <p>However, even in Adagrad, there is problem that the magnitude of the update gradually becomes weak as learning progresses, as it sums two square of all past gradients</p>
             <p>To solve this, <code class="highlighter-rouge">RMSProp</code> was introduced. It allows gradient in the far past to be forgotten and the recent gradient to be applied with high significance (Exponential Moving Average)</p>
+            
+             <code class="highlighter-rouge">h ← h + ∂L/∂W ⊙ ∂L/∂W</code>
+            <code class="highlighter-rouge">W ← W - η *1/√h * ∂L/∂W</code>
+            <p>W : weights to be updated
+∂L/∂W : gradient of the loss function of W
+η : learning rate
+h : sum of two square of the previous gradients</p>
+            
             <figure class="highlight">
             <pre><code class="language-html" data-lang="html"><span class="c">&lt;-- AdaGrad --&gt;</span>
 <span class="na">class</span> AdaGrad :
@@ -173,7 +195,8 @@
             params[key] -= <span class="k">self</span>.lr * grads[key] / (np.sqrt(<span class="k">self</span>.h[key] + 1e-7)
     </code></pre></figure>
   
-            <h3>RMSProp (Root Mean Square Propagation)</h3>
+            <h3>
+              RMSProp (Root Mean Square Propagation)</h3>
             <figure class="highlight">
             <pre><code class="language-html" data-lang="html"><span class="c">&lt;-- RMSprop --&gt;</span>
 <span class="na">class</span> RMSprop :
@@ -197,7 +220,8 @@
             
     </code></pre></figure>
   
-<h3>Adam optimization</h3>
+<h3>
+  Adam optimization</h3>
             <p>It's an optimization technique where it combined both the momentum and Adagrad</p>
             <p>Also it allows <a href="https://hansololee.github.io/optimization/adam/" title ="bias correction"><code class="highlighter-rouge">bias correction</code></a> of the hyper parameters</p>
             <figure class="highlight">
@@ -219,7 +243,7 @@
                 <span class="k">self</span>.m[key] = np.zeros_like(val)
                 <span class="k">self</span>.v[key] = np.zeros_like(val)
                 
-        <span class="c">self</span>.iter += 1 
+        <span class="k">self</span>.iter += 1 
         lr_t = <span class="k">self</span>.lr * np.sqrt(1.0 - <span class="k">self</span>.beta2 ** <span class="k">self</span>.iter) / (1.0 - <span class="k">self</span>.beta1 ** <span class="k">self</span>.iter)
                
         <span class="l">for</span> key <span class="l">in</span> params.keys():
