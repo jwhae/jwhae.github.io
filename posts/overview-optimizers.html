@@ -98,8 +98,6 @@
                 watch out for identation, the code block require each of the line to start from the left corner  
               -->
               <pre><code class="language-html" data-lang="html"><span class="c">&lt;-- Momentum --&gt;</span>
-              
-              
 <span class="na">class</span> Momentum :
     <span class="nt">def</span> __init__(self, lr= 0.01, momentum = 0.9) : 
         self.lr = lr
@@ -121,6 +119,8 @@
             <p>SGD is one of the simplest optimization method available. It achieves <code class="highlighter-rouge">optimization</code> by taking the differentiation of the gradient until it reaches the global optimal value</p>
             <p>However, it may be very inefficient depending on the situation. For instance</p>
             <p>f(x, y) = 1/20 * x² + y²</p>
+            
+             <pre><code class="language-html" data-lang="html"><span class="c">&lt;-- AdaGrad --&gt;</span>
 <span class="na">class</span> AdaGrad :
     <span class="nt">def</span> __init__(self, lr= 0.01) : 
         self.lr = lr
