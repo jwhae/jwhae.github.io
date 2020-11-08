@@ -120,7 +120,8 @@
             <p>However, it may be very inefficient depending on the situation. For instance</p>
             <p>f(x, y) = 1/20 * x² + y²</p>
             
-             <pre><code class="language-html" data-lang="html"><span class="c">&lt;-- AdaGrad --&gt;</span>
+            <figure class="highlight">
+            <pre><code class="language-html" data-lang="html"><span class="c">&lt;-- AdaGrad --&gt;</span>
 <span class="na">class</span> AdaGrad :
     <span class="nt">def</span> __init__(self, lr= 0.01) : 
         self.lr = lr
@@ -138,8 +139,9 @@
             params[key] -= self.lr * grads[key] / (np.sqrt(self.h[key] + 1e-7)
     </code></pre></figure>
       
-<p>Explain AdaGrad</p>
-<pre><code class="language-html" data-lang="html"><span class="c">&lt;-- AdaGrad --&gt;</span>
+            <p>Explain AdaGrad</p>
+            <figure class="highlight">
+            <pre><code class="language-html" data-lang="html"><span class="c">&lt;-- AdaGrad --&gt;</span>
 <span class="na">class</span> AdaGrad :
     <span class="nt">def</span> __init__(self, lr= 0.01) : 
         self.lr = lr
@@ -157,8 +159,9 @@
             params[key] -= self.lr * grads[key] / (np.sqrt(self.h[key] + 1e-7)
     </code></pre></figure>
     
-<p>Explain Nesterov (Root Mean Square Propagation)</p>
-<pre><code class="language-html" data-lang="html"><span class="c">&lt;-- Nestrov --&gt;</span>
+            <p>Explain Nesterov (Root Mean Square Propagation)</p>
+            <figure class="highlight">
+            <pre><code class="language-html" data-lang="html"><span class="c">&lt;-- Nestrov --&gt;</span>
 <span class="na">class</span> Adam :
     <span class="nt">def</span> __init__(self, momentum = 0.9) : 
         self.lr = lr
@@ -182,8 +185,9 @@
     </code></pre></figure>
   
   
-<p>Explain RMSprop (Root Mean Square Propagation)</p>
-<pre><code class="language-html" data-lang="html"><span class="c">&lt;-- RMSDrop --&gt;</span>
+            <p>Explain RMSprop (Root Mean Square Propagation)</p>
+            <figure class="highlight">
+            <pre><code class="language-html" data-lang="html"><span class="c">&lt;-- RMSDrop --&gt;</span>
 <span class="na">class</span> Adam :
     <span class="nt">def</span> __init__(self, lr= 0.01, decay_rate = 0.99) : 
         self.lr = lr
