@@ -58,7 +58,7 @@
           <header class="article-header">
             <h1>Overview of AI Optimizers</h1>
             <p>The main purpose of training a AI model is to identify parameters that minimizes the result of a <code class="highlighter-rouge">loss function</code>. 
-               This can also be defined as a <em><code class="highlighter-rouge">optimization</code></em> of parameters in AI model. 
+               This can also be defined as a <code class="highlighter-rouge">optimization</code> of parameters in AI model. 
             </p>
             <div class="article-list-footer">
               <span class="article-list-date"> November 08, 2020 </span>
@@ -71,7 +71,9 @@
           </header>
 
           <div class="article-content">
-            <p>There are many reasons to why different means of optimization is applied to during the training phase of AI model. For instance, let's look at SGD</p>
+            <p>There are a few optimization methods implemented in the field of deep learning</p>
+            
+            <h3>SGD</h3>
             <figure class="highlight">
               <!-- 
                 code block 
@@ -86,8 +88,17 @@
         <span class="l">for</span> key <span class="l">in</span> params.keys():
             params[key] -= <span class="k">self</span>.lr * grads[key]
     </code></pre></figure>
+            <p>Despite its simplicity, SGD has some problems when implemented</p>
+            <ul>
+              <li><code class="highlighter-rouge">convergence</code>: as it updates weight using its derivatives, if the derivative is one, there is no more update of the weight, thereby stuck in the local optimal(sub-optimal).</li>
+              <li><code class="highlighter-rouge">efficiency</code>: for anistropy functions, which the gradient changes according its direction, the changes to the weight is applied too radically, requiring more time to converge. </li>
+              <li><code class="highlighter-rouge">learning rate</code>: without appropriate learning rate, learning does occur at a optimal level. Too big of l.r causes learning to fail, and too little of l.r causes learning to take to converge. </li>
+            </ul>
             
-            <p>Momentum</p>
+            <h3>Momentum</h3>
+            <p>To solve the <code class="highlighter-rouge">convergence</code> that SGD has, momentum optimization was introduced</p>
+            <p>By considering, the velocity of the gradient, it updates the gradient even when it is a local gradient, and also updating the gradient faster making it more efficient</p>
+            
             <figure class="highlight">
               <!-- 
                 code block 
@@ -111,31 +122,7 @@
             <span class="k">self</span>.v[key] = <span class="k">self</span>.momentum * <span class="k">self</span>.v[key] - <span class="k">self</span>.lr * grads[key]
             params[key] += <span class="k">self</span>.v[key]
     </code></pre></figure>
-
-            <p>SGD is one of the simplest optimization method available. It achieves <code class="highlighter-rouge">optimization</code> by taking the differentiation of the gradient until it reaches the global optimal value</p>
-            <p>However, it may be very inefficient depending on the situation. For instance</p>
-            <p>f(x, y) = 1/20 * x² + y²</p>
             
-            <p>Explain AdaGrad</p>
-            <figure class="highlight">
-            <pre><code class="language-html" data-lang="html"><span class="c">&lt;-- AdaGrad --&gt;</span>
-<span class="na">class</span> AdaGrad :
-    <span class="o">def</span> __init__(self, lr= 0.01) : 
-        <span class="k">self</span>.lr = lr
-        <span class="k">self</span>.h = <span class="o">None</span>
-                
-    <span class="o">def</span> update(self, params, grads):
-        <span class="l">if</span> <span class="k">self</span>.h <span class="l">is</span> <span class="o">None</span>:
-            <span class="k">self</span>.h = {}
-            
-            <span class="l">for</span> key, val <span class="l">in</span> params.items():
-                <span class="k">self</span>.h[key] = np.zeros_like(val)
-               
-        <span class="l">for</span> key <span class="l">in</span> params.keys():
-            <span class="k">self</span>.h[key] = grads[key]**2
-            params[key] -= <span class="k">self</span>.lr * grads[key] / (np.sqrt(<span class="k">self</span>.h[key] + 1e-7)
-    </code></pre></figure>
-    
             <p>Explain Nesterov</p>
             <figure class="highlight">
             <pre><code class="language-html" data-lang="html"><span class="c">&lt;-- Nestrov --&gt;</span>
@@ -158,9 +145,35 @@
             params[key] += <span class="k">self</span>.momentum ** 2 * <span class="k">self</span>.v[key]
             params[key] -= (1 + <span class="k">self</span>.momentum) * <span class="k">self</span>.lr * grads[param]
     </code></pre></figure>
+
+            <h3>AdaGrad</h3>
+            <p>To solve the <code class="highlighter-rouge">learning rate</code> problem SGD has, AdaGrad optimization method was introduced</p>
+            <p>Initially there was <code class="highlighter-rouge">learning rate decay</code>, which decreased the learning rate as the learning progresses</p>
+            <p>However, in learning rate decay, paramters were all decreased at an identical speed</p>
+            
+            <p>In <code class="highlighter-rouge">AdaGrad</code> improved learning rate decay by adaptively updating the degree of decay for each parameters in the model</p>
+            <p>However, even in Adagrad, there is problem that the magnitude of the update gradually becomes weak as learning progresses, as it sums two square of all past gradients</p>
+            <p>To solve this, <code class="highlighter-rouge">RMSProp</code> was introduced. It allows gradient in the far past to be forgotten and the recent gradient to be applied with high significance (Exponential Moving Average)</p>
+            <figure class="highlight">
+            <pre><code class="language-html" data-lang="html"><span class="c">&lt;-- AdaGrad --&gt;</span>
+<span class="na">class</span> AdaGrad :
+    <span class="o">def</span> __init__(self, lr= 0.01) : 
+        <span class="k">self</span>.lr = lr
+        <span class="k">self</span>.h = <span class="o">None</span>
+                
+    <span class="o">def</span> update(self, params, grads):
+        <span class="l">if</span> <span class="k">self</span>.h <span class="l">is</span> <span class="o">None</span>:
+            <span class="k">self</span>.h = {}
+            
+            <span class="l">for</span> key, val <span class="l">in</span> params.items():
+                <span class="k">self</span>.h[key] = np.zeros_like(val)
+               
+        <span class="l">for</span> key <span class="l">in</span> params.keys():
+            <span class="k">self</span>.h[key] = grads[key]**2
+            params[key] -= <span class="k">self</span>.lr * grads[key] / (np.sqrt(<span class="k">self</span>.h[key] + 1e-7)
+    </code></pre></figure>
   
-  
-            <p>Explain RMSprop (Root Mean Square Propagation)</p>
+            <h3>RMSProp (Root Mean Square Propagation)</h3>
             <figure class="highlight">
             <pre><code class="language-html" data-lang="html"><span class="c">&lt;-- RMSprop --&gt;</span>
 <span class="na">class</span> RMSprop :
@@ -184,7 +197,11 @@
             
     </code></pre></figure>
   
-<p>Explain Adam</p>
+<h3>Adam optimization</h3>
+            <p>To solve the <code class="highlighter-rouge">learning rate</code> problem SGD has, AdaGrad optimization method was introduced</p>
+            <p>Initially there was <code class="highlighter-rouge">learning rate decay</code>, which decreased the learning rate as the learning progresses</p>
+            <p>However, in learning rate decay, paramters were all decreased at an identical speed</p>
+            
             <figure class="highlight">
             <pre><code class="language-html" data-lang="html"><span class="c">&lt;-- Adam --&gt;</span>
 <span class="na">class</span> Adam :
