@@ -108,10 +108,10 @@
         if <span class="na">self</span>.v is None:
             <span class="na">self</span>.v = {}
             
-            for key, val in params.items():
+            <span class="s">for</span> key, val <span class="s">in</span> params.items():
                 <span class="na">self</span>.v[key] = np.zeros_like(val)
                
-        for key in params.keys():
+        <span class="s">for</span> key <span class="s">in</span> params.keys():
             <span class="na">self</span>.v[key] = <span class="na">self</span>.momentum * <span class="na">self</span>.v[key] - <span class="c">self</span>.lr * grads[key]
             params[key] += <span class="c">self</span>.v[key]
     </code></pre></figure>
@@ -131,10 +131,10 @@
         if <span class="na">self</span>.h is None:
             <span class="na">self</span>.h = {}
             
-            for key, val in params.items():
+            <span class="s">for</span> key, val in params.items():
                 <span class="na">self</span>.h[key] = np.zeros_like(val)
                
-        for key in params.keys():
+        <span class="s">for</span> key <span class="s">in</span> params.keys():
             <span class="na">self</span>.h[key] = grads[key] * grads[key]
             params[key] -= <span class="na">self</span>.lr * grads[key] / (np.sqrt(<span class="na">self</span>.h[key] + 1e-7)
     </code></pre></figure>
@@ -151,10 +151,10 @@
         if <span class="na">self</span>.h is None:
             <span class="na">self</span>.h = {}
             
-            for key, val in params.items():
+            <span class="s">for</span> key, val in params.items():
                 <span class="c">self</span>.h[key] = np.zeros_like(val)
                
-        for key in params.keys():
+        <span class="s">for</span> key in params.keys():
             <span class="na">self</span>.h[key] = grads[key] * grads[key]
             params[key] -= <span class="na">self</span>.lr * grads[key] / (np.sqrt(<span class="na">self</span>.h[key] + 1e-7)
     </code></pre></figure>
@@ -172,10 +172,10 @@
         if <span class="na">self</span>.v is None:
             <span class="na">self</span>.v = {}
             
-            for key, val in params.items():
+            <span class="s">for</span> key, val in params.items():
                 <span class="na">self</span>.v[key] = np.zeros_like(val)
                 
-        for key in params.keys():
+        <span class="s">for</span> key in params.keys():
             <span class="na">self</span>.v[key] *= self.momentum
             <span class="na">self</span>.v[key] -= <span class="c">self</span>.lr * grads[key]
             params[key] += <span class="na">self</span>.momentum ** 2 * <span class="na">self</span>.v[key]
@@ -198,10 +198,10 @@
         if <span class="na">self</span>.h is None:
             <span class="na">self</span>.h = {}
             
-            for key, val in params.items():
+            <span class="s">for</span> key, val <span class="s">in</span> params.items():
                 <span class="na">self</span>.h[key] = np.zeros_like(val)
                 
-        for key in params.keys():
+        <span class="s">for</span> key <span class="s">in</span> params.keys():
             <span class="na">self</span>.h[key] *= <span class="na">self</span>.decay_rate
             <span class="na">self</span>.h[key] += (1 - <span class="na">self</span>.decay_rate) * grads[key]**2
             
@@ -224,14 +224,14 @@
         if <span class="na">self</span>.m is None:
             <span class="na">self</span>.m = {}
             
-            for key, val in params.items():
+            <span class="s">for</span> key, val <span class="s">in</span> params.items():
                 <span class="na">self</span>.m[key] = np.zeros_like(val)
                 <span class="na">self</span>.v[key] = np.zeros_like(val)
                 
         <span class="c">self</span>.iter += 1 
         lr_t = <span class="na">self</span>.lr * np.sqrt(1.0 - <span class="na">self</span>.beta2 ** <span class="na">self</span>.iter) / (1.0 - <span class="na">self</span>.beta1 ** <span class="c">self</span>.iter)
                
-        for key in params.keys():
+        <span class="s">for</span> key <span class="s">in</span> params.keys():
             <span class="na">self</span>.m[key] += (1 - self.beta1) * (grads[key] - <span class="na">self</span>.m[key])
             <span class="na">self</span>.v[key] += (1 - self.beta2) * (grads[key]**2 - <span class="na">self</span>.v[key])
             
