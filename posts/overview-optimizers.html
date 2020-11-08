@@ -78,11 +78,6 @@
                 watch out for identation, the code block require each of the line to start from the left corner  
               -->
               <pre><code class="language-html" data-lang="html"><span class="c">&lt;-- SGD --&gt;</span>
-
-
-
-
-
 <span class="na">class</span> SGD :
     <span class="o">def</span> __init__(self, lr= 0.01) : 
         <span class="k">self</span>.lr = lr
@@ -110,11 +105,11 @@
         <span class="k">self</span>.v = None
                 
     <span class="o">def</span> update(self, params, grads):
-        if <span class="nc">self</span>.v is None:
-            <span class="nc">self</span>.v = {}
+        if <span class="k">self</span>.v is None:
+            <span class="k">self</span>.v = {}
             
             <span class="l">for</span> key, val <span class="l">in</span> params.items():
-                <span class="nc">self</span>.v[key] = np.zeros_like(val)
+                <span class="k">self</span>.v[key] = np.zeros_like(val)
                
         <span class="l">for</span> key <span class="l">in</span> params.keys():
             <span class="k">self</span>.v[key] = <span class="k">self</span>.momentum * <span class="k">self</span>.v[key] - <span class="k">self</span>.lr * grads[key]
@@ -134,14 +129,14 @@
         <span class="k">self</span>.h = None
                 
     <span class="o">def</span> update(self, params, grads):
-        if <span class="k">self</span>.h is None:
+        <span class="l">if</span> <span class="k">self</span>.h <span class="l">is</span> <span class="o">None</span>:
             <span class="k">self</span>.h = {}
             
             <span class="l">for</span> key, val <span class="l">in</span> params.items():
-                <span class="c">self</span>.h[key] = np.zeros_like(val)
+                <span class="k">self</span>.h[key] = np.zeros_like(val)
                
         <span class="l">for</span> key <span class="l">in</span> params.keys():
-            <span class="na">self</span>.h[key] = grads[key] * grads[key]
+            <span class="k">self</span>.h[key] = grads[key]**2
             params[key] -= <span class="k">self</span>.lr * grads[key] / (np.sqrt(<span class="k">self</span>.h[key] + 1e-7)
     </code></pre></figure>
     
@@ -155,19 +150,17 @@
         <span class="k">self</span>.v = None
                 
     <span class="o">def</span> update(self, params, grads):
-        if <span class="k">self</span>.v is None:
+        <span class="l">if</span> <span class="k">self</span>.h <span class="l">is</span> <span class="o">None</span>:
             <span class="k">self</span>.v = {}
             
             <span class="l">for</span> key, val <span class="l">in</span> params.items():
                 <span class="k">self</span>.v[key] = np.zeros_like(val)
                 
         <span class="l">for</span> key <span class="l">in</span> params.keys():
-            <span class="k">self</span>.v[key] *= self.momentum
-            <span class="k">self</span>.v[key] -= <span class="c">self</span>.lr * grads[key]
+            <span class="k">self</span>.v[key] *= <span class="k">self</span>.momentum
+            <span class="k">self</span>.v[key] -= <span class="k">self</span>.lr * grads[key]
             params[key] += <span class="k">self</span>.momentum ** 2 * <span class="k">self</span>.v[key]
             params[key] -= (1 + <span class="k">self</span>.momentum) * <span class="k">self</span>.lr * grads[param]
-            
-            
     </code></pre></figure>
   
   
@@ -176,12 +169,12 @@
             <pre><code class="language-html" data-lang="html"><span class="c">&lt;-- RMSDrop --&gt;</span>
 <span class="na">class</span> Adam :
     <span class="o">def</span> __init__(self, lr= 0.01, decay_rate = 0.99) : 
-        <span class="c">self</span>.lr = lr
-        <span class="c">self</span>.decay_rate = decay_rate
-        <span class="c">self</span>.h = None
+        <span class="k">self</span>.lr = lr
+        <span class="k">self</span>.decay_rate = decay_rate
+        <span class="k">self</span>.h = None
                 
     <span class="o">def</span> update(self, params, grads):
-        if <span class="k">self</span>.h is None:
+        <span class="l">if</span> <span class="k">self</span>.h <span class="l">is</span> <span class="o">None</span>:
             <span class="k">self</span>.h = {}
             
             <span class="l">for</span> key, val <span class="l">in</span> params.items():
@@ -208,7 +201,7 @@
         <span class="k">self</span>.v = None
                 
     <span class="o">def</span> update(self, params, grads):
-        if <span class="k">self</span>.m is None:
+        <span class="l">if</span> <span class="k">self</span>.h <span class="l">is</span> <span class="o">None</span>:
             <span class="k">self</span>.m = {}
             
             <span class="l">for</span> key, val <span class="l">in</span> params.items():
@@ -219,8 +212,8 @@
         lr_t = <span class="k">self</span>.lr * np.sqrt(1.0 - <span class="k">self</span>.beta2 ** <span class="k">self</span>.iter) / (1.0 - <span class="k">self</span>.beta1 ** <span class="k">self</span>.iter)
                
         <span class="l">for</span> key <span class="l">in</span> params.keys():
-            <span class="k">self</span>.m[key] += (1 - self.beta1) * (grads[key] - <span class="k">self</span>.m[key])
-            <span class="k">self</span>.v[key] += (1 - self.beta2) * (grads[key]**2 - <span class="k">self</span>.v[key])
+            <span class="k">self</span>.m[key] += (1 - <span class="k">self</span>.beta1) * (grads[key] - <span class="k">self</span>.m[key])
+            <span class="k">self</span>.v[key] += (1 - <span class="k">self</span>.beta2) * (grads[key]**2 - <span class="k">self</span>.v[key])
             
             params[key] -= lr_t * <span class="k">self</span>.m[key] / (np.sqrt(<span class="k">self</span>.v[key] + 1e-7)
             
