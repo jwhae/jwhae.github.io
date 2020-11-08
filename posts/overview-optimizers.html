@@ -87,8 +87,9 @@
             params[key] -= self.lr * grads[key]
               
               </code></pre></figure>
-            <p>SGD is one of the most simplest optimization method available. It achieves <code class="highlighter-rouge">optimization</code> by taking the differentiation of the gradient until it reaches the global optimal value</p>
-            
+            <p>SGD is one of the simplest optimization method available. It achieves <code class="highlighter-rouge">optimization</code> by taking the differentiation of the gradient until it reaches the global optimal value</p>
+            <p>However, it may be very inefficient depending on the situation. For instance</p>
+            <p>f(x, y) = 1/20 * x² + y²</p>
             <ul>
               <li><code class="highlighter-rouge">blog_theme</code>: 2 options here, <code class="highlighter-rouge">light</code> or <code class="highlighter-rouge">dark</code>. Choose which design you prefer.</li>
               <li><code class="highlighter-rouge">name</code>: Used as the page title and throughout your project as the default name.</li>
