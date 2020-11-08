@@ -80,11 +80,11 @@
               <pre><code class="language-html" data-lang="html"><span class="c">&lt;-- SGD --&gt;</span>
 <span class="na">class</span> SGD :
     <span class="nt">def</span> __init__(self, lr= 0.01) : 
-        self.lr = lr
+        <span class="c">self</span>.lr = lr
                 
     <span class="nt">def</span> update(self, params, grads):
         for key in params.keys():
-            params[key] -= self.lr * grads[key]
+            params[key] -= <span class="c">self</span>.lr * grads[key]
     </code></pre></figure>
             <p>SGD is one of the simplest optimization method available. It achieves <code class="highlighter-rouge">optimization</code> by taking the differentiation of the gradient until it reaches the global optimal value</p>
             <p>However, it may be very inefficient depending on the situation. For instance</p>
@@ -100,20 +100,20 @@
               <pre><code class="language-html" data-lang="html"><span class="c">&lt;-- Momentum --&gt;</span>
 <span class="na">class</span> Momentum :
     <span class="nt">def</span> __init__(self, lr= 0.01, momentum = 0.9) : 
-        self.lr = lr
-        self.momentum = momentum
-        self.v = None
+        <span class="c">self</span>.lr = lr
+        <span class="c">self</span>.momentum = momentum
+        <span class="c">self</span>.v = None
                 
     <span class="nt">def</span> update(self, params, grads):
-        if self.v is None:
-            self.v = {}
+        if <span class="c">self</span>.v is None:
+            <span class="c">self</span>.v = {}
             
             for key, val in params.items():
-                self.v[key] = np.zeros_like(val)
+                <span class="c">self</span>.v[key] = np.zeros_like(val)
                
         for key in params.keys():
-            self.v[key] = self.momentum * self.v[key] - self.lr * grads[key]
-            params[key] += self.v[key]
+            <span class="c">self</span>.v[key] = <span class="c">self</span>.momentum * <span class="c">self</span>.v[key] - <span class="c">self</span>.lr * grads[key]
+            params[key] += <span class="c">self</span>.v[key]
     </code></pre></figure>
 
             <p>SGD is one of the simplest optimization method available. It achieves <code class="highlighter-rouge">optimization</code> by taking the differentiation of the gradient until it reaches the global optimal value</p>
@@ -124,19 +124,19 @@
             <pre><code class="language-html" data-lang="html"><span class="c">&lt;-- AdaGrad --&gt;</span>
 <span class="na">class</span> AdaGrad :
     <span class="nt">def</span> __init__(self, lr= 0.01) : 
-        self.lr = lr
-        self.h = None
+        <span class="c">self</span>.lr = lr
+        <span class="c">self</span>.h = None
                 
     <span class="nt">def</span> update(self, params, grads):
-        if self.h is None:
-            self.h = {}
+        if <span class="c">self</span>.h is None:
+            <span class="c">self</span>.h = {}
             
             for key, val in params.items():
-                self.h[key] = np.zeros_like(val)
+                <span class="c">self</span>.h[key] = np.zeros_like(val)
                
         for key in params.keys():
-            self.h[key] = grads[key] * grads[key]
-            params[key] -= self.lr * grads[key] / (np.sqrt(self.h[key] + 1e-7)
+            <span class="c">self</span>.h[key] = grads[key] * grads[key]
+            params[key] -= <span class="c">self</span>.lr * grads[key] / (np.sqrt(<span class="c">self</span>.h[key] + 1e-7)
     </code></pre></figure>
       
             <p>Explain AdaGrad</p>
@@ -148,15 +148,15 @@
         self.h = None
                 
     <span class="nt">def</span> update(self, params, grads):
-        if self.h is None:
-            self.h = {}
+        if <span class="c">self</span>.h is None:
+            <span class="c">self</span>.h = {}
             
             for key, val in params.items():
-                self.h[key] = np.zeros_like(val)
+                <span class="c">self</span>.h[key] = np.zeros_like(val)
                
         for key in params.keys():
-            self.h[key] = grads[key] * grads[key]
-            params[key] -= self.lr * grads[key] / (np.sqrt(self.h[key] + 1e-7)
+            <span class="c">self</span>.h[key] = grads[key] * grads[key]
+            params[key] -= <span class="c">self</span>.lr * grads[key] / (np.sqrt(<span class="c">self</span>.h[key] + 1e-7)
     </code></pre></figure>
     
             <p>Explain Nesterov (Root Mean Square Propagation)</p>
@@ -164,22 +164,22 @@
             <pre><code class="language-html" data-lang="html"><span class="c">&lt;-- Nestrov --&gt;</span>
 <span class="na">class</span> Adam :
     <span class="nt">def</span> __init__(self, momentum = 0.9) : 
-        self.lr = lr
-        self.momentum = momentum
-        self.v = None
+        <span class="c">self</span>.lr = lr
+        <span class="c">self</span>.momentum = momentum
+        <span class="c">self</span>.v = None
                 
     <span class="nt">def</span> update(self, params, grads):
-        if self.v is None:
-            self.v = {}
+        if <span class="c">self</span>.v is None:
+            <span class="c">self</span>.v = {}
             
             for key, val in params.items():
-                self.v[key] = np.zeros_like(val)
+                <span class="c">self</span>.v[key] = np.zeros_like(val)
                 
         for key in params.keys():
-            self.v[key] *= self.momentum
-            self.v[key] -= self.lr * grads[key]
-            params[key] += self.momentum ** 2 * self.v[key]
-            params[key] -= (1 + self.momentum) * self.lr * grads[param]
+            <span class="c">self</span>.v[key] *= self.momentum
+            <span class="c">self</span>.v[key] -= <span class="c">self</span>.lr * grads[key]
+            params[key] += <span class="c">self</span>.momentum ** 2 * <span class="c">self</span>.v[key]
+            params[key] -= (1 + <span class="c">self</span>.momentum) * <span class="c">self</span>.lr * grads[param]
             
             
     </code></pre></figure>
@@ -190,22 +190,22 @@
             <pre><code class="language-html" data-lang="html"><span class="c">&lt;-- RMSDrop --&gt;</span>
 <span class="na">class</span> Adam :
     <span class="nt">def</span> __init__(self, lr= 0.01, decay_rate = 0.99) : 
-        self.lr = lr
-        self.decay_rate = decay_rate
-        self.h = None
+        <span class="c">self</span>.lr = lr
+        <span class="c">self</span>.decay_rate = decay_rate
+        <span class="c">self</span>.h = None
                 
     <span class="nt">def</span> update(self, params, grads):
-        if self.h is None:
-            self.h = {}
+        if <span class="c">self</span>.h is None:
+            <span class="c">self</span>.h = {}
             
             for key, val in params.items():
-                self.h[key] = np.zeros_like(val)
+                <span class="c">self</span>.h[key] = np.zeros_like(val)
                 
         for key in params.keys():
-            self.h[key] *= self.decay_rate
-            self.h[key] += (1 - self.decay_rate) * grads[key]**2
+            <span class="c">self</span>.h[key] *= self.decay_rate
+            <span class="c">self</span>.h[key] += (1 - self.decay_rate) * grads[key]**2
             
-            params[key] -= self.lr * grads[key] / (np.sqrt(self.h[key] + 1e-7)
+            params[key] -= <span class="c">self</span>.lr * grads[key] / (np.sqrt(self.h[key] + 1e-7)
             
     </code></pre></figure>
   
@@ -213,29 +213,29 @@
 <pre><code class="language-html" data-lang="html"><span class="c">&lt;-- Adam --&gt;</span>
 <span class="na">class</span> Adam :
     <span class="nt">def</span> __init__(self, lr= 0.01, beta1 = 0.9 beta2 = 0.999) : 
-        self.lr = lr
-        self.beta1 = beta1
-        self.beta2 = beta2
-        self.iter = 0
-        self.m = None
-        self.v = None
+        <span class="c">self</span>.lr = lr
+        <span class="c">self</span>.beta1 = beta1
+        <span class="c">self</span>.beta2 = beta2
+        <span class="c">self</span>.iter = 0
+        <span class="c">self</span>.m = None
+        <span class="c">self</span>.v = None
                 
     <span class="nt">def</span> update(self, params, grads):
-        if self.m is None:
-            self.m = {}
+        if <span class="c">self</span>.m is None:
+            <span class="c">self</span>.m = {}
             
             for key, val in params.items():
-                self.m[key] = np.zeros_like(val)
-                self.v[key] = np.zeros_like(val)
+                <span class="c">self</span>.m[key] = np.zeros_like(val)
+                <span class="c">self</span>.v[key] = np.zeros_like(val)
                 
-        self.iter += 1 
-        lr_t = self.lr * np.sqrt(1.0 - self.beta2 ** self.iter) / (1.0 - self.beta1 ** self.iter)
+        <span class="c">self</span>.iter += 1 
+        lr_t = self.lr * np.sqrt(1.0 - self.beta2 ** self.iter) / (1.0 - <span class="c">self</span>.beta1 ** <span class="c">self</span>.iter)
                
         for key in params.keys():
-            self.m[key] += (1 - self.beta1) * (grads[key] - self.m[key])
-            self.v[key] += (1 - self.beta2) * (grads[key]**2 - self.v[key])
+            <span class="c">self</span>.m[key] += (1 - self.beta1) * (grads[key] - <span class="c">self</span>.m[key])
+            <span class="c">self</span>.v[key] += (1 - self.beta2) * (grads[key]**2 - <span class="c">self</span>.v[key])
             
-            params[key] -= lr_t * self.m[key] / (np.sqrt(self.v[key] + 1e-7)
+            params[key] -= lr_t * <span class="c">self</span>.m[key] / (np.sqrt(<span class="c">self</span>.v[key] + 1e-7)
             
     </code></pre></figure>
 
