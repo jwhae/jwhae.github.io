@@ -57,7 +57,9 @@
         <article class="article scrollappear">
           <header class="article-header">
             <h1>Overview of AI Optimizers</h1>
-            <p>Different types of ai optimizers and their differences</p>
+            <p>The main purpose of training a AI model is to identify parameters that minimizes the result of a <code class="highlighter-rouge">loss function</code>. 
+               This can also be defined as a <em><code class="highlighter-rouge">optimization</code></em> of parameters in AI model. 
+            </p>
             <div class="article-list-footer">
               <span class="article-list-date"> November 08, 2020 </span>
               <span class="article-list-divider">-</span>
@@ -69,22 +71,19 @@
           </header>
 
           <div class="article-content">
-            <p>The <code class="highlighter-rouge">_config.yml</code> file is the most important one. It contains the basic setup of your project.
-            Some parts are preconfigured and shouldn’t be touched as the comments state.
-            Of course if you are familiar with Jekyll you can change whatever you want.</p>
-
-            <p>Note: You do not <em>have</em> to change anything. Chalk works out of the box. I do recommend changing the <code class="highlighter-rouge">_config.yml</code> to suit your needs.</p>
-
-            <h3 id="mandatory-settings">Mandatory settings</h3>
+            <p>There are many reasons to why different means of optimization is applied to during the training phase of AI model. For instance, let's look at SGD</p>
+            <h3 id="mandatory-settings">SGD</h3>
             <figure class="highlight">
               <!-- coding block-->
               <pre>
-                <code class="language-yml" data-lang="yml">
-                  <span class="c1"># Mandatory settings</span>
-                  <span class="na">blog_theme</span><span class="pi">:</span> <span class="s">light</span> <span class="c1"># Or use dark</span>
-                  <span class="na">name</span><span class="pi">:</span> <span class="s">Chalk</span>
-                  <span class="na">paginate</span><span class="pi">:</span> <span class="m">25</span>
-                  <span class="na">url</span><span class="pi">:</span> <span class="c1"># add your site url (format: https://example.com)</span>
+                <code class="language-html" data-lang="html">
+                  <span class="c">&lt;SGD --&gt;</span>
+                  <span class="na">class</span> SGD :
+                  <span class="nt">def</span> __init__(self, lr= 0.01) : 
+                  <span class="nt">&lt;p&gt;</span>
+                    This is a paragraph text.
+                  <span class="nt">&lt;/p&gt;</span>
+                <span class="nt">&lt;/div&gt;</span></code></pre></figure>
                 </code>
                </pre>
             </figure>
