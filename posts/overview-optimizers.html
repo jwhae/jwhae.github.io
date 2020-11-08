@@ -76,9 +76,9 @@
             <h3>SGD</h3>
             <p>One of simpler optimizer to be implemented. It is better than vanila gradient descent</p>
             <code class="highlighter-rouge">W ← W - η * ∂L/∂W</code>
-            <p>W : weights to be updated
-∂L/∂W : gradient of the loss function of W
-η : learning rate</p>
+            <p>W : weights to be updated</p>
+            <p>∂L/∂W : gradient of the loss function of W</p>
+            <p>η : learning rate</p>
             <figure class="highlight">
               <!-- 
                 code block 
@@ -106,11 +106,11 @@
             
             <code class="highlighter-rouge">v ← αv - η * ∂L/∂W</code>
             <code class="highlighter-rouge">W ← W + v</code>
-            <p>W : weights to be updated
-∂L/∂W : gradient of the loss function of W
-η : learning rate
-v : velocity
-α : friction (0.9)</p>
+            <p>W : weights to be updated</p>
+            <p>∂L/∂W : gradient of the loss function of W</p>
+            <p>η : learning rate</p>
+            <p>v : velocity</p>
+            <p>α : friction (0.9)</p>
             <figure class="highlight">
               <!-- 
                 code block 
@@ -171,10 +171,10 @@ v : velocity
             
              <code class="highlighter-rouge">h ← h + ∂L/∂W ⊙ ∂L/∂W</code>
             <code class="highlighter-rouge">W ← W - η *1/√h * ∂L/∂W</code>
-            <p>W : weights to be updated
-∂L/∂W : gradient of the loss function of W
-η : learning rate
-h : sum of two square of the previous gradients</p>
+            <p>W : weights to be updated</p>
+            <p>∂L/∂W : gradient of the loss function of W</p>
+            <p>η : learning rate</p>
+            <p>h : sum of two square of the previous gradients</p>
             
             <figure class="highlight">
             <pre><code class="language-html" data-lang="html"><span class="c">&lt;-- AdaGrad --&gt;</span>
