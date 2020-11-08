@@ -74,15 +74,18 @@
             <p>There are many reasons to why different means of optimization is applied to during the training phase of AI model. For instance, let's look at SGD</p>
             <h3 id="mandatory-settings">SGD</h3>
             <figure class="highlight">
-              <!-- code block -->
+              <!-- 
+                code block 
+                watch out for identation, the code block require each of the line to start from the left corner  
+              -->
               <pre><code class="language-html" data-lang="html"><span class="na">&lt;-- SGD --&gt;</span>
 <span class="c">class</span> SGD :
-                <span class="nt">def</span> __init__(self, lr= 0.01) : 
-                  self.lr = lr
+    <span class="nt">def</span> __init__(self, lr= 0.01) : 
+        self.lr = lr
                 
-                <span class="nt">def</span> update(self, params, grads):
-                  for key in params.keys():
-                    params[key] -= self.lr * grads[key]
+    <span class="nt">def</span> update(self, params, grads):
+        for key in params.keys():
+            params[key] -= self.lr * grads[key]
               
               </code></pre></figure>
 
